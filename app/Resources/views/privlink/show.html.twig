@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Privlink</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ privlink.id }}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{{ privlink.text }}</td>
+            </tr>
+            <tr>
+                <th>Createdate</th>
+                <td>{% if privlink.createDate %}{{ privlink.createDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Enddate</th>
+                <td>{% if privlink.endDate %}{{ privlink.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ privlink.password }}</td>
+            </tr>
+            <tr>
+                <th>Hash</th>
+                <td>{{ privlink.hash }}</td>
+            </tr>
+            <tr>
+                <th>Conficuration</th>
+                <td>{{ privlink.conficuration }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('privlink_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('privlink_edit', { 'id': privlink.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

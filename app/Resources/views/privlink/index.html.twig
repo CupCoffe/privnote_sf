@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Privlinks list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Text</th>
+                <th>Createdate</th>
+                <th>Enddate</th>
+                <th>Password</th>
+                <th>Hash</th>
+                <th>Conficuration</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for privlink in privlinks %}
+            <tr>
+                <td><a href="{{ path('privlink_show', { 'id': privlink.id }) }}">{{ privlink.id }}</a></td>
+                <td>{{ privlink.text }}</td>
+                <td>{% if privlink.createDate %}{{ privlink.createDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if privlink.endDate %}{{ privlink.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ privlink.password }}</td>
+                <td>{{ privlink.hash }}</td>
+                <td>{{ privlink.conficuration }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('privlink_show', { 'id': privlink.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('privlink_edit', { 'id': privlink.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('privlink_new') }}">Create a new privlink</a>
+        </li>
+    </ul>
+{% endblock %}
