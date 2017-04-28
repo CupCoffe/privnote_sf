@@ -1,0 +1,4 @@
+privlink:
+    resource: "@PrivlinkBundle/Controller/"
+    type:     annotation
+    prefix:   /
