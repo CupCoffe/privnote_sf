@@ -1,6 +1,5 @@
 privlink:
-    resource: "@PrivlinkBundle/Controller/"
-    type:     annotation
+    resource: "@PrivlinkBundle/Resources/config/routing.yml"
     prefix:   /
 
 app:
