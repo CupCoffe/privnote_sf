@@ -26,7 +26,7 @@ class privlinkController extends Controller
 
         $privlinks = $em->getRepository('PrivlinkBundle:privlink')->findAll();
 
-        return $this->render('privlink/index.html.twig', array(
+        return $this->render('PrivlinkBundle:privlink:index.html.twig', array(
             'privlinks' => $privlinks,
         ));
     }
@@ -51,7 +51,7 @@ class privlinkController extends Controller
             return $this->redirectToRoute('privlink_show', array('id' => $privlink->getId()));
         }
 
-        return $this->render('privlink/new.html.twig', array(
+        return $this->render('PrivlinkBundle:privlink:new.html.twig', array(
             'privlink' => $privlink,
             'form' => $form->createView(),
         ));
@@ -91,7 +91,7 @@ class privlinkController extends Controller
             return $this->redirectToRoute('privlink_edit', array('id' => $privlink->getId()));
         }
 
-        return $this->render('privlink/edit.html.twig', array(
+        return $this->render('PrivlinkBundle:privlink:edit.html.twig', array(
             'privlink' => $privlink,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
