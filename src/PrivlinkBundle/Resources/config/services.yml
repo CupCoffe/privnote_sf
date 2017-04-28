@@ -1,0 +1,4 @@
+services:
+#    privlink.example:
+#        class: PrivlinkBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
