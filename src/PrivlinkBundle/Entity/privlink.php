@@ -103,10 +103,9 @@ class privlink
      * @param \DateTime $createDate
      * @return privlink
      */
-    public function setCreateDate($createDate)
+    public function setCreateDate($now)
     {
-        $this->createDate = $createDate;
-
+        $this->createDate = $now;
         return $this;
     }
 
@@ -175,7 +174,6 @@ class privlink
     public function setHash($hash)
     {
         $this->hash = $hash;
-
         return $this;
     }
 
