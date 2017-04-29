@@ -29,6 +29,7 @@ class privlinkController extends Controller
         return $this->render('PrivlinkBundle:privlink:index.html.twig', array(
             'privlinks' => $privlinks,
         ));
+
     }
 
     /**
@@ -44,6 +45,10 @@ class privlinkController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $now = new \DateTime('now');
+            $privlink->setCreateDate($now);
+            $hash = substr(md5(uniqid()), 0, 10);
+            $privlink->setHash($hash);
             $em = $this->getDoctrine()->getManager();
             $em->persist($privlink);
             $em->flush();
@@ -67,7 +72,7 @@ class privlinkController extends Controller
     {
         $deleteForm = $this->createDeleteForm($privlink);
 
-        return $this->render('privlink/show.html.twig', array(
+        return $this->render('PrivlinkBundle:privlink:show.html.twig', array(
             'privlink' => $privlink,
             'delete_form' => $deleteForm->createView(),
         ));
