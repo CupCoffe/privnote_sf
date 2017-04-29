@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Privlink</h1>
+
+    <table>
+        <tbody>
+        <tr>
+                <th>Посилання</th>
+                <td>http://privnote/{{ privlink.hash }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('privlink_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
