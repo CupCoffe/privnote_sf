@@ -49,6 +49,8 @@ class privlinkController extends Controller
             $privlink->setCreateDate($now);
             $hash = substr(md5(uniqid()), 0, 10);
             $privlink->setHash($hash);
+            $configuration = 1;
+            $privlink->setConfiguration($configuration);
             $em = $this->getDoctrine()->getManager();
             $em->persist($privlink);
             $em->flush();
