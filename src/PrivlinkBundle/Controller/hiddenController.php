@@ -20,6 +20,7 @@ class hiddenController extends Controller
 
     public function indexAction($hash)
     {
+
         $em = $this->getDoctrine()->getManager();
 
         $note = $em->createQueryBuilder('privlink')
@@ -29,9 +30,12 @@ class hiddenController extends Controller
             ->setParameter('hash', $hash)
             ->getQuery();
         $text = $note->getResult();
+
         return $this->render('PrivlinkBundle:privlink:hidden.html.twig', array(
             'privlinks' => $text,
         ));
+
+
 
     }
 
