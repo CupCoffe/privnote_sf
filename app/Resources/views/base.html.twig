@@ -2,11 +2,25 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+        <title>{% block title %}Privnote{% endblock %}</title>
+        {% block stylesheets %}
+            <style>
+            body {
+                text-align: center;
+            }
+            </style>
+
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+    <div class="jumbotron text-center">
+        <a href="{{ path('privlink_new') }}"><h1>Privnote</h1></a>
+        <p>Private and safe messages</p>
+    </div>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
