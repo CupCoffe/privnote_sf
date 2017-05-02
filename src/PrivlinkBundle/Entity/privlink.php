@@ -193,6 +193,7 @@ class privlink
      * @param boolean $configuration
      * @return privlink
      */
+
     public function setConfiguration($configuration)
     {
         $this->configuration = $configuration;
