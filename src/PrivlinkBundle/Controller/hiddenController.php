@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\Null;
 
 /**
  * Hidden controller.
@@ -31,13 +33,37 @@ class hiddenController extends Controller
             ->getQuery();
         $text = $note->getResult();
 
-        return $this->render('PrivlinkBundle:privlink:hidden.html.twig', array(
-            'privlinks' => $text,
-        ));
+        foreach ($text as $a=>$value) {
+            $configuration = $value;
+            $boolean = json_decode($configuration);
+
+            if ($boolean) {
+                $em->createQueryBuilder('privlink')
+                    ->update('PrivlinkBundle:privlink', 'privlink')
+                    ->set('privlink.configuration', '?1')
+                    ->setParameter(1, false)
+                    ->andwhere('privlink.hash IN (:hash)')
+                    ->setParameter('hash', $hash)
+                    ->getQuery()->getSingleScalarResult();
+
+                return $this->render('PrivlinkBundle:privlink:hidden.html.twig', array(
+                    'privlinks' => $text,
+                ));
+            } else{
+                return $this->render('PrivlinkBundle:privlink:empty_page.html.twig', array(
+                    'privlinks' => $text,
+                ));
+            }
+
+        }
+
+
+        }
 
 
 
-    }
+
+
 
 
 }
