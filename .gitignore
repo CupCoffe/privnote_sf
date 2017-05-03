@@ -10,4 +10,8 @@
 /vendor/
 /bin/
 /composer.phar
+<<<<<<< HEAD
 
+=======
+/.idea/
+>>>>>>> 70710c180ab3048e872aa3202016dc37cb52de40

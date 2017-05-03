@@ -4,12 +4,8 @@
     {% for privlink in privlinks %}
         <h3>Вміст записки</h3>
 <div class="container">
+    <pre>{{ privlink.text }}</pre>
 
-            <table class="table">
-                <tr>
-                    <th><pre>{{ privlink.text }}</pre></th>
-                </tr>
-            </table>
 </div>
 {% endfor %}
 {% endblock %}

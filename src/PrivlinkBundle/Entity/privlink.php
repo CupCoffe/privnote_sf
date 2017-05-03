@@ -63,6 +63,16 @@ class privlink
      */
     private $configuration;
 
+    /**Return string from configuration*/
+    public function __toString()
+    {
+        try {
+            return (string) $this->configuration;
+        } catch (Exception $exception) {
+            return '';
+        }
+    }
+
 
     /**
      * Get id
