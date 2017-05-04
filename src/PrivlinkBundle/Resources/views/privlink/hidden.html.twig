@@ -2,10 +2,11 @@
 
 {% block body %}
     {% for privlink in privlinks %}
-        <h3>Вміст записки</h3>
+        <div class="alert alert-danger" role="alert">
+            <strong>Увага!</strong> Після перегляду повідомлення буде видалено.
+        </div>
 <div class="container">
     <pre>{{ privlink.text }}</pre>
-
 </div>
 {% endfor %}
 {% endblock %}
