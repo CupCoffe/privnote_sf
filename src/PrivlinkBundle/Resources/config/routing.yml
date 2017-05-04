@@ -3,6 +3,10 @@ privlink:
     type:     annotation
     prefix:   /
 
+privlink:
+    pattern: /
+    defaults: {_controller: PrivlinkBundle:privlink:new}
+
 hidden:
     pattern: /{hash}
     defaults: {_controller: PrivlinkBundle:hidden:index}
