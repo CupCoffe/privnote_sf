@@ -2,14 +2,8 @@
 
 {% block body %}
     {% for privlink in privlinks %}
-        <h3>Вміст записки</h3>
-        <div class="container">
-
-            <table class="table">
-                <tr>
-                    <th><pre>Ваша записка видалена</pre></th>
-                </tr>
-            </table>
+        <div class="alert alert-warning" role="alert">
+            Ваше повідомлення було видалене.
         </div>
     {% endfor %}
 {% endblock %}
