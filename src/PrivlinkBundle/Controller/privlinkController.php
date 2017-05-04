@@ -20,7 +20,7 @@ class privlinkController extends Controller
      * @Route("/", name="privlink_index")
      * @Method("GET")
      */
-    public function indexAction()
+    /*public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -30,12 +30,12 @@ class privlinkController extends Controller
             'privlinks' => $privlinks,
         ));
 
-    }
+    }*/
 
     /**
      * Creates a new privlink entity.
      *
-     * @Route("/new", name="privlink_new")
+     * @Route("/", name="privlink_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
