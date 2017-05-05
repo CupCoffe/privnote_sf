@@ -48,9 +48,7 @@ class hiddenController extends Controller
                     'privlink' => $text,
                 ));
             } else{
-                return $this->render('PrivlinkBundle:privlink:empty_page.html.twig', array(
-                    'privlinks' => $text,
-                ));
+                return $this->render('PrivlinkBundle:privlink:empty_page.html.twig');
             }
 
         }
