@@ -1,12 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for privlink in privlinks %}
         <div class="alert alert-danger" role="alert">
             <strong>Увага!</strong> Після перегляду повідомлення буде видалено.
         </div>
 <div class="container">
     <pre>{{ privlink.text }}</pre>
 </div>
-{% endfor %}
 {% endblock %}
