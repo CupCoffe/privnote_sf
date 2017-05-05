@@ -31,13 +31,11 @@ class hiddenController extends Controller
             ->andWhere('privlink.hash IN (:hash)')
             ->setParameter('hash', $hash)
             ->getQuery();
-        $text = $note->getResult();
+        $text = $note->getSingleResult();
 
-        foreach ($text as $a=>$value) {
-            $configuration = $value;
-            $boolean = json_decode($configuration);
+        $configuration = $text->getConfiguration();
 
-            if ($boolean) {
+            if ($configuration) {
                 $em->createQueryBuilder('privlink')
                     ->update('PrivlinkBundle:privlink', 'privlink')
                     ->set('privlink.configuration', '?1')
@@ -47,7 +45,7 @@ class hiddenController extends Controller
                     ->getQuery()->getSingleScalarResult();
 
                 return $this->render('PrivlinkBundle:privlink:hidden.html.twig', array(
-                    'privlinks' => $text,
+                    'privlink' => $text,
                 ));
             } else{
                 return $this->render('PrivlinkBundle:privlink:empty_page.html.twig', array(
@@ -58,16 +56,8 @@ class hiddenController extends Controller
         }
 
 
-        }
-
-
-
-
-
-
 
 }
 
 
 
-?>
