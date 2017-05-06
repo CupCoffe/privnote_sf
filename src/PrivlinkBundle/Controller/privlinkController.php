@@ -28,8 +28,6 @@ class privlinkController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $now = new \DateTime('now');
-            $privlink->setCreateDate($now);
             $hash = substr(md5(uniqid()), 0, 10);
             $privlink->setHash($hash);
             $configuration = true;
