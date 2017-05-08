@@ -3,6 +3,7 @@
 namespace PrivlinkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo; // gedmo annotations
 
 /**
  * privlink
@@ -30,7 +31,7 @@ class privlink
 
     /**
      * @var \DateTime
-     *
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="create_date", type="datetime")
      */
     private $createDate;
@@ -62,6 +63,24 @@ class privlink
      * @ORM\Column(name="configuration", type="boolean", nullable=true)
      */
     private $configuration;
+
+    /**
+     * @var string $createdFromIp
+     *
+     * @Gedmo\IpTraceable(on="create")
+     * @ORM\Column(length=45, nullable=true)
+     */
+    private $createdFromIp;
+
+    /**Return string from configuration*/
+    public function __toString()
+    {
+        try {
+            return (string) $this->configuration;
+        } catch (Exception $exception) {
+            return '';
+        }
+    }
 
 
     /**
@@ -103,10 +122,9 @@ class privlink
      * @param \DateTime $createDate
      * @return privlink
      */
-    public function setCreateDate($createDate)
+    public function setCreateDate($now)
     {
-        $this->createDate = $createDate;
-
+        $this->createDate = $now;
         return $this;
     }
 
@@ -175,7 +193,6 @@ class privlink
     public function setHash($hash)
     {
         $this->hash = $hash;
-
         return $this;
     }
 
@@ -195,6 +212,7 @@ class privlink
      * @param boolean $configuration
      * @return privlink
      */
+
     public function setConfiguration($configuration)
     {
         $this->configuration = $configuration;

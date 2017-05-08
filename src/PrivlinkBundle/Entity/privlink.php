@@ -2,8 +2,8 @@
 
 namespace PrivlinkBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo; // gedmo annotations
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * privlink
@@ -67,7 +67,7 @@ class privlink
     /**
      * @var string $createdFromIp
      *
-     * @Gedmo\IpTraceable(on="create")
+     * @Gedmo\ IpTraceable(on="create")
      * @ORM\Column(name="createdFromIp", length=45, nullable=true)
      */
     private $createdFromIp;
@@ -252,4 +252,6 @@ class privlink
     {
         return $this->createdFromIp;
     }
+
+
 }

@@ -5,7 +5,8 @@ namespace PrivlinkBundle\Controller;
 use PrivlinkBundle\Entity\privlink;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Privlink controller.
@@ -32,6 +33,8 @@ class privlinkController extends Controller
             $privlink->setHash($hash);
             $configuration = true;
             $privlink->setConfiguration($configuration);
+            $user_ip = $this->get_user_ip();
+            $privlink->setCreatedFromIp($user_ip);
             $em = $this->getDoctrine()->getManager();
             $em->persist($privlink);
             $em->flush();
@@ -45,6 +48,8 @@ class privlinkController extends Controller
         ));
     }
 
+
+
     /**
      * Finds and displays a privlink entity.
      *
@@ -56,6 +61,21 @@ class privlinkController extends Controller
         return $this->render('PrivlinkBundle:privlink:show.html.twig', array(
             'privlink' => $privlink,
         ));
+    }
+
+    // Determine the IP address of the user
+    public function get_user_ip(){
+        $client = @$_SERVER{'HTTP_CLIENT_IP'};
+        $forward = @$_SERVER{'HTTP_X_FORWARDER_FOR'};
+        $remote = @$_SERVER{'REMOTE_ADDR'};
+
+        if(filter_var($client, FILTER_VALIDATE_IP)){
+            $ip_addr = $forward;
+        } else
+        {
+            $ip_addr = $remote;
+        }
+        return $ip_addr;
     }
 
 }

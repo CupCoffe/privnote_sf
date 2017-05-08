@@ -87,8 +87,6 @@ doctrine:
                 alias: GedmoTree # (optional) it will default to the name set for the mapping
                 is_bundle: false
 
-
-
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'
@@ -131,5 +129,7 @@ stof_doctrine_extensions:
         default:
             tree: true
             timestampable: true
+
+
 
 
