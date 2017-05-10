@@ -13,7 +13,13 @@ class privlinkType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('text')->add('password');
+        $builder->add('text')->add('password')->add('endDate',  'choice', array(
+            'choices' => array(
+                1 => 'Один день',
+                7 => 'Тиждень',
+                30 => 'Місяць',
+                null => 'Видалити після перегляду',
+            )));
     }
     
     /**

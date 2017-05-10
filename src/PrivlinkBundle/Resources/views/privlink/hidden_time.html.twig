@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="alert alert-danger" role="alert">
+        <strong>Увага!</strong> Повідомлення буде видалено через:
+    </div>
+    <div class="container">
+        <pre>{{ privlink.text }}</pre>
+    </div>
+{% endblock %}
+

@@ -24,15 +24,35 @@ class privlinkController extends Controller
      */
     public function newAction(Request $request)
     {
+
+
         $privlink = new Privlink();
         $form = $this->createForm('PrivlinkBundle\Form\privlinkType', $privlink);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //get request from form
+            $endDate = $request->request->get('privlinkbundle_privlink')['endDate'];
+            if ($endDate != null)
+            {
+                // get today's datetime
+                $date = new \DateTime('now');
+                // plus interval from form
+                $up_date = $date->add(new \DateInterval('P' . $endDate . 'D'));
+                $privlink->setEndDate($up_date);
+            } else
+                {
+                    //set endDate NULL
+                $privlink->setEndDate(null);
+                }
+
+            //get hash with ten symbols
             $hash = substr(md5(uniqid()), 0, 10);
             $privlink->setHash($hash);
             $configuration = true;
             $privlink->setConfiguration($configuration);
+            //call function to get user ip address
             $user_ip = $this->get_user_ip();
             $privlink->setCreatedFromIp($user_ip);
             $em = $this->getDoctrine()->getManager();
