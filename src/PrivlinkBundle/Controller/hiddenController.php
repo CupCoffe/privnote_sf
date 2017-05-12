@@ -46,10 +46,11 @@ class hiddenController extends Controller
                 if ($nowDate < $endDate ) {
                     //Returns the difference between two DateTime objects
                     $diff=date_diff($nowDate,$endDate);
-                    echo $diff->format("%d днів %h годин %i хвилин %s секунд");
+                    //Get Time to remove
+                    $time = $diff->format("%d днів %h годин %i хвилин %s секунд");
 
                     return $this->render('PrivlinkBundle:privlink:hidden_time.html.twig', array(
-                        'privlink' => $text,
+                        'privlink' => $text, 'time' => $time,
                     ));
                 } else if ($endDate == NULL) {
                     $em->createQueryBuilder('privlink')

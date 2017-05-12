@@ -59,7 +59,9 @@ class privlinkController extends Controller
             $em->persist($privlink);
             $em->flush();
 
-            return $this->redirectToRoute('privlink_show', array('id' => $privlink->getId()));
+            return $this->render('PrivlinkBundle:privlink:show.html.twig', array(
+                'privlink' => $privlink,
+            ));
         }
 
         return $this->render('PrivlinkBundle:privlink:new.html.twig', array(
@@ -76,12 +78,12 @@ class privlinkController extends Controller
      * @Route("/{id}", name="privlink_show")
      * @Method("GET")
      */
-    public function showAction(privlink $privlink)
+    /*public function showAction(privlink $privlink)
     {
         return $this->render('PrivlinkBundle:privlink:show.html.twig', array(
             'privlink' => $privlink,
         ));
-    }
+    }*/
 
     // Determine the IP address of the user
     public function get_user_ip(){

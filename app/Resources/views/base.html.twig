@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+        <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <title>{% block title %}Privnote{% endblock %}</title>
         {% block stylesheets %}
             <style>
@@ -22,6 +24,104 @@
                 line-height: 50px;
                 top: 0px;
             }
+            .jumbotron {
+                padding-top: 5px;
+                padding-bottom: 5px;
+                background-color: #424558;
+            }
+            .jumbotron h1{
+                color: red;
+            }
+            .jumbotron p{
+                color: white;
+            }
+            .btn3d {
+                position:relative;
+                top: -6px;
+                border:0;
+                transition: all 40ms linear;
+                margin-top:10px;
+                margin-bottom:10px;
+                margin-left:2px;
+                margin-right:2px;
+            }
+            .btn3d:active:focus,
+            .btn3d:focus:hover,
+            .btn3d:focus {
+                -moz-outline-style:none;
+                outline:medium none;
+            }
+            .btn3d:active, .btn3d.active {
+                top:2px;
+            }
+            .btn3d.btn-success {
+                box-shadow:0 0 0 1px #31c300 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #5eb924, 0 8px 8px 1px rgba(0,0,0,0.5);
+                background-color:#78d739;
+            }
+            .btn3d.btn-success:active, .btn3d.btn-success.active {
+                box-shadow:0 0 0 1px #30cd00 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+                background-color: #78d739;
+            }
+
+            .btn3d.btn-primary {
+                box-shadow:0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #4D5BBE, 0 8px 8px 1px rgba(0,0,0,0.5);
+                background-color:#4274D7;
+            }
+            .btn3d.btn-primary:active, .btn3d.btn-primary.active {
+                box-shadow:0 0 0 1px #417fbd inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+                background-color:#4274D7;
+            }
+            textarea.form-control {
+                height: 200px;
+                background-color: #ffface;
+            }
+                .container {
+                    background-color: aliceblue;
+                    border-radius: 10px;
+                    box-shadow: 10px 10px 5px #888888;
+                }
+
+            /* Footer */
+
+            footer{
+                background-color: #424558;
+                position: inherit;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 35px;
+                text-align: center;
+                color: #CCC;
+            }
+
+            footer p {
+                padding: 10.5px;
+                margin: 0px;
+                line-height: 100%;
+                margin-top: 100px;
+            }
+                #p1{
+                    font-family: initial;
+                    font-size: larger;
+                    background-color: aliceblue;
+                }
+
+                .container .hidden_text{
+                    height: 200px;
+                    background-color: #f5f5f5;
+                    border-radius: 10px;
+                    padding: 10px;
+                    border: 1px solid;
+                    text-align: left;
+                }
+                #time{
+                    color: black;
+                }
+            .alert-danger {
+                background-color: #f8f2cc;
+            }
+
+
             </style>
 
         {% endblock %}
@@ -30,10 +130,26 @@
     <body>
     <div class="jumbotron text-center">
         <a href="{{ path('privlink_new') }}"><h1>Privnote</h1></a>
-        <p>Private and safe messages</p>
+        <p>Відсилайте записки, котрі будуть самознищені після прочитування</p>
     </div>
         {% block body %}{% endblock %}
+    {% block footer %}
+
+        <footer>
+            <p>© 2017<a style="color:#0a93a6; text-decoration:none;"> Copyright &copy; 2017</a>, All rights reserved 2017.</p>
+        </footer>
+    {% endblock %}
         {% block javascripts %}
+            <script>
+            function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+            }
+            </script>
+
         {% endblock %}
     </body>
 </html>

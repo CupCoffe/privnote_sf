@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div class="alert alert-danger" role="alert">
-        <strong>Увага!</strong> Повідомлення буде видалено через:
+        <strong>Увага!</strong> Повідомлення буде видалено через: <strong><div id="time"> {{ time }}</strong></div>
     </div>
     <div class="container">
-        <pre>{{ privlink.text }}</pre>
+        <div class="hidden_text">
+            <p id="p2"> {{ privlink.text }}</p>
+        </div>
+        <button class="btn btn-success btn-lg btn3d" onclick="copyToClipboard('#p2')">Скопіювати</button>
     </div>
 {% endblock %}
+
 
