@@ -72,6 +72,42 @@ class privlink
      */
     private $createdFromIp;
 
+    /**
+     * @var int $viewsCount
+     *
+     * @ORM\Column(name="viewsCount", type="integer", nullable=true)
+     */
+    private $viewsCount;
+
+    /**
+     * @var string $lastReviewFromIp
+     *
+     * @ORM\Column(name="lastReviewFromIp", length=45, nullable=true)
+     */
+    private $lastReviewFromIp;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="lastReviewDate", type="datetime", nullable=true)
+     */
+    private $lastReviewDate;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="checkbox", type="boolean", nullable=true)
+     */
+    private $checkbox;
+
+    /**
+     * @var string $email
+     *
+     * @ORM\Column(name="sendToEmail", length=45, nullable=true)
+     */
+    private $email;
+
+
     /**Return string from configuration*/
     public function __toString()
     {
@@ -254,4 +290,121 @@ class privlink
     }
 
 
+
+    /**
+     * Set viewsCount
+     *
+     * @param integer $viewsCount
+     * @return privlink
+     */
+    public function setViewsCount($viewsCount)
+    {
+        $this->viewsCount = $viewsCount;
+
+        return $this;
+    }
+
+    /**
+     * Get viewsCount
+     *
+     * @return integer 
+     */
+    public function getViewsCount()
+    {
+        return $this->viewsCount;
+    }
+
+    /**
+     * Set lastReviewFromIp
+     *
+     * @param string $lastReviewFromIp
+     * @return privlink
+     */
+    public function setLastReviewFromIp($lastReviewFromIp)
+    {
+        $this->lastReviewFromIp = $lastReviewFromIp;
+
+        return $this;
+    }
+
+    /**
+     * Get lastReviewFromIp
+     *
+     * @return string 
+     */
+    public function getLastReviewFromIp()
+    {
+        return $this->lastReviewFromIp;
+    }
+
+    /**
+     * Set lastReviewDate
+     *
+     * @param \DateTime $lastReviewDate
+     * @return privlink
+     */
+    public function setLastReviewDate($lastReviewDate)
+    {
+        $this->lastReviewDate = $lastReviewDate;
+
+        return $this;
+    }
+
+    /**
+     * Get lastReviewDate
+     *
+     * @return \DateTime 
+     */
+    public function getLastReviewDate()
+    {
+        return $this->lastReviewDate;
+    }
+
+    /**
+     * Set checkbox
+     *
+     * @param boolean $checkbox
+     * @return privlink
+     */
+    public function setCheckbox($checkbox)
+    {
+        $this->checkbox = $checkbox;
+
+        return $this;
+    }
+
+    /**
+     * Get checkbox
+     *
+     * @return boolean 
+     */
+    public function getCheckbox()
+    {
+        return $this->checkbox;
+    }
+
+
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return privlink
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
 }

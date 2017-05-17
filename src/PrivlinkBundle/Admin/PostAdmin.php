@@ -54,9 +54,12 @@ class PostAdmin extends Admin
             ->add('createDate', null, array('label' => 'Create Date'))
             ->add('endDate', null, array('label' => 'End Date'))
             ->add('password', null, array('label' => 'Password'))
-            ->addIdentifier('hash', null, array('label' => 'Hash'))
+            ->add('hash', null, array('label' => 'Hash'))
             ->add('configuration', null, array('label' => 'Configuration'))
-            ->add('createdFromIp', null, array('label' => 'From IP'));
+            ->add('createdFromIp', null, array('label' => 'Created from IP'))
+            ->add('viewsCount', null, array('label' => 'Views Count'))
+            ->add('lastReviewFromIp', null, array('label' => 'Last Review From IP'))
+            ->add('lastReviewDate', null, array('label' => 'Last Review Date'));
     }
 
     /**

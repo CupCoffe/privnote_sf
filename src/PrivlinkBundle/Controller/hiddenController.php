@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints\Null;
 class hiddenController extends Controller
 {
 
-    public function indexAction($hash)
+    public function indexAction(Request $request, $hash)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -37,41 +37,189 @@ class hiddenController extends Controller
 
         //get value from database
         $configuration = $text->getConfiguration();
+
         //get today's datetime
-        $nowDate = new \DateTime('now');
+        $nowDate = $this->newDate();
+
         //get value endDate from database
         $endDate = $text->getEndDate();
 
-            if ($configuration) {
-                if ($nowDate < $endDate ) {
-                    //Returns the difference between two DateTime objects
-                    $diff=date_diff($nowDate,$endDate);
-                    //Get Time to remove
-                    $time = $diff->format("%d днів %h годин %i хвилин %s секунд");
+        $password = $text->getPassword();
 
-                    return $this->render('PrivlinkBundle:privlink:hidden_time.html.twig', array(
-                        'privlink' => $text, 'time' => $time,
+            if ($configuration) {
+
+                if ($password) {
+
+                    $form = $this->createForm('PrivlinkBundle\Form\checkPasswordType');
+                    $form->handleRequest($request);
+
+                    if ($form->isSubmitted() && $form->isValid()) {
+
+                        //get request from form
+                        $password_2 = $request->request->get('privlinkbundle_privlink')['password'];
+
+                        if ($password == $password_2) {
+
+                            //get page views
+                            $views = $text->getViewsCount();
+                            if ($views == null) {
+                                $text->setViewsCount(1);
+                                $email = $text->getEmail();
+                                $this->sendMail($email);
+
+                            } else if ($views > 0) {
+                                $count = $views + 1;
+                                $text->setViewsCount($count);
+                            }
+
+                            //set ip address last review
+                            $user_ip = $this->get_user_ip();
+                            $text->setLastReviewFromIp($user_ip);
+
+                            $reviewDate = $this->newDate();
+                            $text->setlastReviewDate($reviewDate);
+                            $em->flush();
+
+                            if ($nowDate < $endDate) {
+
+                                //Returns the difference between two DateTime objects
+                                $diff = date_diff($nowDate, $endDate);
+
+                                //Get Time to remove
+                                $time = $diff->format("%d днів %h годин %i хвилин %s секунд");
+
+                                return $this->render('PrivlinkBundle:privlink:hidden_time.html.twig', array(
+                                    'privlink' => $text, 'time' => $time,
+                                ));
+                            } else if ($endDate == NULL) {
+
+                                $em->createQueryBuilder('privlink')
+                                    ->update('PrivlinkBundle:privlink', 'privlink')
+                                    ->set('privlink.configuration', '?1')
+                                    ->setParameter(1, false)
+                                    ->andwhere('privlink.hash IN (:hash)')
+                                    ->setParameter('hash', $hash)
+                                    ->getQuery()->getSingleScalarResult();
+                                return $this->render('PrivlinkBundle:privlink:hidden.html.twig', array(
+                                    'privlink' => $text,
+                                ));
+
+                            } else {
+                                return $this->render('PrivlinkBundle:privlink:empty_page.html.twig');
+                            }
+
+                        } else {
+                            return $this->render('PrivlinkBundle:privlink:checkPassword.html.twig', array(
+                                'form' => $form->createView(), 'text' => false,
+                            ));
+                        }
+
+
+                    }
+                    return $this->render('PrivlinkBundle:privlink:checkPassword.html.twig', array(
+                        'form' => $form->createView(), 'text' => true,
                     ));
-                } else if ($endDate == NULL) {
-                    $em->createQueryBuilder('privlink')
-                        ->update('PrivlinkBundle:privlink', 'privlink')
-                        ->set('privlink.configuration', '?1')
-                        ->setParameter(1, false)
-                        ->andwhere('privlink.hash IN (:hash)')
-                        ->setParameter('hash', $hash)
-                        ->getQuery()->getSingleScalarResult();
-                    return $this->render('PrivlinkBundle:privlink:hidden.html.twig', array(
-                        'privlink' => $text,
-                    ));
+
+                }
+
+                if (empty($password)) {
+
+                    //get page views
+                    $views = $text->getViewsCount();
+                    if ($views == null) {
+                        $email = $text->getEmail();
+                        $this->sendMail($email);
+                        $text->setViewsCount(1);
+
+                    } else if ($views > 0) {
+                        $count = $views + 1;
+                        $text->setViewsCount($count);
+                    }
+
+                    //set ip address last review
+                    $user_ip = $this->get_user_ip();
+                    $text->setLastReviewFromIp($user_ip);
+
+                    $reviewDate = $this->newDate();
+                    $text->setlastReviewDate($reviewDate);
+                    $em->flush();
+
+                    if ($nowDate < $endDate) {
+
+                        //Returns the difference between two DateTime objects
+                        $diff = date_diff($nowDate, $endDate);
+
+                        //Get Time to remove
+                        $time = $diff->format("%d днів %h годин %i хвилин %s секунд");
+
+                        return $this->render('PrivlinkBundle:privlink:hidden_time.html.twig', array(
+                            'privlink' => $text, 'time' => $time,
+                        ));
+                    } else if ($endDate == NULL) {
+
+                        $em->createQueryBuilder('privlink')
+                            ->update('PrivlinkBundle:privlink', 'privlink')
+                            ->set('privlink.configuration', '?1')
+                            ->setParameter(1, false)
+                            ->andwhere('privlink.hash IN (:hash)')
+                            ->setParameter('hash', $hash)
+                            ->getQuery()->getSingleScalarResult();
+                        return $this->render('PrivlinkBundle:privlink:hidden.html.twig', array(
+                            'privlink' => $text,
+                        ));
+
+                    } else {
+                        return $this->render('PrivlinkBundle:privlink:empty_page.html.twig');
+                    }
                 } else {
                     return $this->render('PrivlinkBundle:privlink:empty_page.html.twig');
                 }
-            } else {
+            }else {
                 return $this->render('PrivlinkBundle:privlink:empty_page.html.twig');
             }
 
         }
 
+
+    // Determine the IP address of the user
+    public function get_user_ip(){
+        $client = @$_SERVER{'HTTP_CLIENT_IP'};
+        $forward = @$_SERVER{'HTTP_X_FORWARDER_FOR'};
+        $remote = @$_SERVER{'REMOTE_ADDR'};
+
+        if(filter_var($client, FILTER_VALIDATE_IP)){
+            $ip_addr = $forward;
+        } else
+        {
+            $ip_addr = $remote;
+        }
+        return $ip_addr;
+    }
+
+    //get today Date Time
+    public function newDate(){
+
+        $date = new \DateTime('now');
+        return $date;
+    }
+
+    //Email Report reading
+    public function sendMail($email){
+        $transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
+            ->setUsername('privnoteSoftGroup@gmail.com')
+            ->setPassword('privnotesg');
+
+        $mailer = \Swift_Mailer::newInstance($transport);
+        $message = \Swift_Message::newInstance('Privnote')
+            ->setFrom(array('privnoteSoftGroup@gmail.com' => 'Private Note'))
+            ->setTo($email)
+            ->setSubject('Записку, яку ви створили, було прочитано')
+            ->setBody('<p>Це автоматичне повідомлення було відправлено з метою повідомити, що вашу записку було прочитано.</p> 
+                        <a>Бажаете відправити ще одну записку? <a href="http://privnote.host-panel.net">http://privnote.host-panel.net</a></p>','text/html');
+
+        $mailer->send($message);
+
+    }
 
 
 }
