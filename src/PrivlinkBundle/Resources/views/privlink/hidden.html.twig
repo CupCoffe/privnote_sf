@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 {% block body %}
         <div class="alert alert-danger" role="alert">
-            <strong>Увага!</strong> Ваше повідомлення видалено, скопіюйте його!
+            <strong>Увага!</strong> Записка була самознищена Якщо вам потрібно зберегти текст, скопіюйте його перш ніж закривати це вікно
         </div>
     <div class="container">
         <div class="hidden_text">
             <p id="p2"> {{ privlink.text }}</p>
         </div>
-        <button class="btn btn-success btn-lg btn3d" onclick="copyToClipboard('#p2')">Скопіювати</button>
+        <div class="submit"><button class="btn btn-success btn-lg btn3d" onclick="copyToClipboard('#p2')">Скопіювати</button></div>
     </div>
 {% endblock %}
 

@@ -3,9 +3,23 @@
 {% block body %}
     <h1>Нова записка</h1>
     <div class="container">
+        <div class="hint">
+        <a onclick="toggle(hidden_content)" class="btn btn-link btn-lg btn3d" role="button"><span class="glyphicon glyphicon-globe"></span> Підказка</a>
+        </div>
+        <div id="hidden_content" style="display: none;">
+            <p>За допомогою Privnote ви можете відправляти записки, що самознищуются після прочитування</p>
+            <p>1. Напишіть записку нижче, зашифруйте її та отримайте посилання</p>
+            <p>2. Надішліть посилання тому, кому ви хочете, щоб він прочитав записку</p>
+            <p>3. Записка самознищиться після прочитування ії отримувачем</p>
+
+            <p>Натисніть кнопку налаштувань, щоб встановити пароль для записки, встановити дату, до якої можна прочитати записку та отримати підтвердження про прочитування.</p>
+        </div>
     {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <input type="submit" value="Створити" class="btn btn-primary btn-lg btn3d"/>
+    {{ form_widget(form)}}
+    <div class="submit">
+    <input type="submit" value="Створити записку" class="btn btn-primary btn-lg btn3d"/>
+        </div>
     {{ form_end(form) }}
     </div>
 {% endblock %}
+
