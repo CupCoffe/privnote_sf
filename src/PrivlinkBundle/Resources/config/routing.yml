@@ -10,3 +10,11 @@ privlink:
 hidden:
     pattern: /hidden/{hash}
     defaults: {_controller: PrivlinkBundle:hidden:index}
+
+about:
+    pattern: /info/about/
+    defaults: {_controller: PrivlinkBundle:default:about}
+
+faq:
+    pattern: /info/faq/
+    defaults: {_controller: PrivlinkBundle:default:faq}

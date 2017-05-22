@@ -35,6 +35,12 @@ class privlinkController extends Controller
 
             //get request from form
             $endDate = $request->request->get('privlinkbundle_privlink')['endDate'];
+            $password = $request->request->get('privlinkbundle_privlink')['password'];
+            if ($password) {
+                $password = md5($password);
+                $privlink->setPassword($password);
+            }
+
             if ($endDate != null)
             {
                 // get today's datetime
@@ -72,19 +78,6 @@ class privlinkController extends Controller
     }
 
 
-
-    /**
-     * Finds and displays a privlink entity.
-     *
-     * @Route("/{id}", name="privlink_show")
-     * @Method("GET")
-     */
-    /*public function showAction(privlink $privlink)
-    {
-        return $this->render('PrivlinkBundle:privlink:show.html.twig', array(
-            'privlink' => $privlink,
-        ));
-    }*/
 
     // Determine the IP address of the user
     public function get_user_ip(){

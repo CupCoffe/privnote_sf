@@ -5,15 +5,7 @@
     <div class="alert alert-success" role="alert">
         <strong>Готово!</strong> Скопіюйте посилання.
     </div>
-<div class="table-responsive">
-    <table class="table">
-        <tbody>
-        <tr>
-            <td id="p1"><strong>http://privnote/hidden/{{ privlink.hash }}</strong></td> <button class="btn btn-success btn-lg btn3d" onclick="copyToClipboard('#p1')">Скопіювати</button>
-        </tr>
-        </tbody>
-    </table>
-</div>
+        <p id="p1"><strong>http://privnote/hidden/{{ privlink.hash }}</strong></p> <button class="btn btn-success btn-lg btn3d" onclick="copyToClipboard('#p1')">Скопіювати</button>
     </div>
 {% endblock %}
 

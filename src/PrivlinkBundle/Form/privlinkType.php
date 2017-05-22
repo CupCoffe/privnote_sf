@@ -17,7 +17,7 @@ class privlinkType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('text',TextareaType::class,array('label' => 'Вміст повідомлення'))
+            ->add('text',TextareaType::class,array('label' => 'Вміст повідомлення', 'attr' => array('class' => 'text_area')))
             ->add('endDate',  'choice', array(
                 'choices' => array(
                     1 => 'Один день',
