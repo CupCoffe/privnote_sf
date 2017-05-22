@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints\Null;
 
 class hiddenController extends Controller
 {
-    
+
     /**
      * Hidden controller.
      *
