@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'  type='text/css'>
 
         <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
@@ -12,6 +13,11 @@
         <title>{% block title %}Privnote{% endblock %}</title>
         {% block stylesheets %}
             <style>
+                body{
+                    font-family: 'Open Sans', sans-serif;
+                    background: url("https://image.freepik.com/free-vector/grey-linen-texture-background_1053-253.jpg");
+                }
+
             h1 {
                 text-align: center;
             }
@@ -23,7 +29,7 @@
             }
             .contact-form{ margin-top:15px;}
             .contact-form .textarea{ min-height:220px; resize:none;}
-            .form-control{ box-shadow:none; border-color:#eee; height:49px;}
+            .form-control{ box-shadow:none; border-color:#eee; height:49px; border: 1px solid;}
             .form-control:focus{ box-shadow:none; border-color:#00b09c;}
             .form-control-feedback{ line-height:50px;}
             .main-btn{ background:#00b09c; border-color:#00b09c; color:#fff;}
@@ -33,8 +39,8 @@
                 top: 0px;
             }
             .jumbotron {
-                padding-top: 5px;
-                padding-bottom: 5px;
+                padding-top: 0px;
+                padding-bottom: 0px;
                 background-color: #424558;
             }
             .jumbotron h1{
@@ -85,11 +91,15 @@
                 background-color: #ffface;
             }
                 .container {
-                    background-color: aliceblue;
+                    /*background-color: aliceblue;
+                    box-shadow: 10px 10px 5px #888888;*/
+                    background-color: white;
                     border-radius: 10px;
-                    box-shadow: 10px 10px 5px #888888;
                 }
                 .container_1{
+                    text-align: center;
+                }
+                .container_2{
                     text-align: center;
                 }
 
@@ -117,6 +127,7 @@
                     font-family: initial;
                     font-size: larger;
                     background-color: aliceblue;
+                    height: 30px;
                 }
 
                 .container .hidden_text{
@@ -142,9 +153,26 @@
                 width: 280px;
                 height: 35px;
             }
+            .password:focus{
+                outline: none;
+                border: 1px solid #7bc1f7;
+                box-shadow: 0px 0px 8px #7bc1f7;
+                -moz-box-shadow: 0px 0px 8px #7bc1f7;
+                -webkit-box-shadow: 0px 0px 8px #7bc1f7;
+            }
             .email{
                 width: 400px;
                 height: 35px;
+                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABClpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wUmlnaHRzPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvcmlnaHRzLyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wUmlnaHRzOk1hcmtlZD0iVHJ1ZSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NzI3NTdDRTExNUFCMTFFMUE5NURCRkMwMEFDNjhEQUMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NzI3NTdDRTIxNUFCMTFFMUE5NURCRkMwMEFDNjhEQUMiPiA8ZGM6cmlnaHRzPiA8cmRmOkFsdD4gPHJkZjpsaSB4bWw6bGFuZz0ieC1kZWZhdWx0Ij5DcmVhdGl2ZSBDb21tb25zIEF0dHJpYnV0aW9uIE5vbi1Db21tZXJjaWFsIE5vIERlcml2YXRpdmVzPC9yZGY6bGk+IDwvcmRmOkFsdD4gPC9kYzpyaWdodHM+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjcyNzU3Q0RGMTVBQjExRTFBOTVEQkZDMDBBQzY4REFDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjcyNzU3Q0UwMTVBQjExRTFBOTVEQkZDMDBBQzY4REFDIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+SoKR9AAAAH5JREFUeNpi/P//PwMlgImBQsDS39/fAKTrydTfyESBZhCoR/bCAig9AYgZceAFaGpRwiARKlEAxPOx2AYSS4CqSYSHAZoimEQCGh+rZmwGYDOEAZdmXAZgMwSrZnwGMKBpSMSZDghEUyLtUyIS+z+5eaGRAgc0Mg54bgQIMAAD7RsCMDpK7QAAAABJRU5ErkJggg==) no-repeat 10px 4px #FFF;
+                border: 1px solid #848484;
+                padding-left: 30px;
+            }
+            .email:focus{
+                outline: none;
+                border: 1px solid #7bc1f7;
+                box-shadow: 0px 0px 8px #7bc1f7;
+                -moz-box-shadow: 0px 0px 8px #7bc1f7;
+                -webkit-box-shadow: 0px 0px 8px #7bc1f7;
             }
 
             .form-group {
@@ -160,6 +188,22 @@
                     width: 300px;
                     padding-left: 20px;
                 }
+                .text_area:focus{
+                    outline: none;
+                    border: 1px solid #7bc1f7;
+                    box-shadow: 0px 0px 8px #7bc1f7;
+                    -moz-box-shadow: 0px 0px 8px #7bc1f7;
+                    -webkit-box-shadow: 0px 0px 8px #7bc1f7;
+                }
+                img{
+                    position: absolute;
+                    margin-top: -100px;
+                    margin-left: 150px;
+                }
+                #hidden_content{
+                    background-color: #e7e7e7;
+                    padding: 5px;
+                }
 
             </style>
 
@@ -168,9 +212,10 @@
     </head>
     <body>
     <div class="jumbotron text-center">
-        <a href="{{ path('privlink_new') }}"><h1>Privnote</h1></a>
+        <a href="{{ path('privlink_new') }}"><h1>Privnote</h1></a> <img src="http://www.computermechanics.com.au/wp-content/uploads/2014/11/spemail-logo.png" width="100" height="111" alt="Винни-Пух">
         <p>Відсилайте записки, котрі будуть самознищені після прочитування</p>
     </div>
+
         {% block body %}{% endblock %}
     {% block footer %}
 
@@ -193,6 +238,39 @@
                 el.style.display = (el.style.display == 'none') ? '' : 'none'
 
             }
+
+            //Anchor Links
+            var controller = new ScrollMagic.Controller();
+
+            // build tween
+            var tween = TweenMax.from("#animate", 0.5, {autoAlpha: 0, scale: 0.7});
+
+            // build scene
+            var scene = new ScrollMagic.Scene({triggerElement: "a#top", duration: 200, triggerHook: "onLeave"})
+                .setTween(tween)
+                .addIndicators() // add indicators (requires plugin)
+                .addTo(controller);
+
+            // change behaviour of controller to animate scroll instead of jump
+            controller.scrollTo(function (newpos) {
+                TweenMax.to(window, 0.5, {scrollTo: {y: newpos}});
+            });
+
+            //  bind scroll to anchor links
+            $(document).on("click", "a[href^='#']", function (e) {
+                var id = $(this).attr("href");
+                if ($(id).length > 0) {
+                    e.preventDefault();
+
+                    // trigger scroll
+                    controller.scrollTo(id);
+
+                    // if supported by the browser we can even update the URL.
+                    if (window.history && window.history.pushState) {
+                        history.pushState("", document.title, id);
+                    }
+                }
+            });
             </script>
 
         {% endblock %}
