@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints\Null;
 class hiddenController extends Controller
 {
 
-    public function indexAction(Request $request, $hash)
+    /*public function indexAction(Request $request, $hash)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -57,6 +57,7 @@ class hiddenController extends Controller
 
                         //get request from form
                         $password_2 = $request->request->get('privlinkbundle_privlink')['password'];
+                        $password_2 = md5($password_2);
 
                         if ($password == $password_2) {
 
@@ -178,8 +179,149 @@ class hiddenController extends Controller
                 return $this->render('PrivlinkBundle:privlink:empty_page.html.twig');
             }
 
-        }
+        }*/
 
+    /**
+     * Hidden controller.
+     *
+     * @Route("hidden")
+     */
+    public function indexAction(Request $request, $hash){
+
+        $text = $this->getObject($hash);
+        //get today's datetime
+        $nowDate = $this->newDate();
+        //get value endDate from database
+        $endDate = $text->getEndDate();
+        //get value from database
+        $configuration = $text->getConfiguration();
+        $password = $text->getPassword();
+
+        if ($configuration) {
+
+            if ($password) {
+                $form = $this->createForm('PrivlinkBundle\Form\checkPasswordType');
+                $form->handleRequest($request);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+                    //get request from form
+                    $entry_password  = $request->request->get('privlinkbundle_privlink')['password'];
+                    $entry_password  = md5($entry_password );
+
+                    if ($password == $entry_password ) {
+                        $this->actionObject($text);
+
+                        if ($nowDate < $endDate) {
+                            $time = $this->timeDifference($nowDate,$endDate);
+                            return $this->render('PrivlinkBundle:privlink:hidden_time.html.twig',
+                                array('privlink' => $text, 'time' => $time,));
+
+                        } else if ($endDate == NULL) {
+                            $this->setConfigNull($hash);
+                            return $this->render('PrivlinkBundle:privlink:hidden.html.twig',
+                                array('privlink' => $text,));
+
+                        } else {
+                            return $this->render('PrivlinkBundle:privlink:empty_page.html.twig');
+                        }
+
+                    } else {
+                        return $this->render('PrivlinkBundle:privlink:checkPassword.html.twig',
+                            array('form' => $form->createView(), 'text' => false,
+                        ));
+                    }
+
+                }
+                return $this->render('PrivlinkBundle:privlink:checkPassword.html.twig',
+                    array('form' => $form->createView(), 'text' => true,));
+            }
+
+            if (empty($password)) {
+                $this->actionObject($text);
+
+                if ($nowDate < $endDate) {
+                    $time = $this->timeDifference($nowDate,$endDate);
+                    return $this->render('PrivlinkBundle:privlink:hidden_time.html.twig',
+                        array('privlink' => $text, 'time' => $time,));
+
+                } else if ($endDate == NULL) {
+                    $this->setConfigNull($hash);
+                    return $this->render('PrivlinkBundle:privlink:hidden.html.twig',
+                        array('privlink' => $text,));
+
+                } else {
+                    return $this->render('PrivlinkBundle:privlink:empty_page.html.twig');
+                }
+            } else {
+                return $this->render('PrivlinkBundle:privlink:empty_page.html.twig');
+            }
+        }else {
+            return $this->render('PrivlinkBundle:privlink:empty_page.html.twig');
+        }
+    }
+
+        //get object from DataBase
+    public function getObject($hash){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $note = $em->createQueryBuilder('privlink')
+            ->select('privlink')
+            ->from('PrivlinkBundle:privlink', 'privlink')
+            ->andWhere('privlink.hash IN (:hash)')
+            ->setParameter('hash', $hash)
+            ->getQuery();
+        $text = $note->getSingleResult();
+
+        return $text;
+
+    }
+
+    //set Views Count, LastReviewDate, LastReviewFromIP, send email,
+    public function actionObject($text){
+            $em = $this->getDoctrine()->getManager();
+            //get page views
+            $views = $text->getViewsCount();
+
+            if ($views == null) {
+                $text->setViewsCount(1);
+                $email = $text->getEmail();
+                $this->sendMail($email);
+
+            } else if ($views > 0) {
+                $count = $views + 1;
+                $text->setViewsCount($count);
+            }
+
+            //set ip address last review
+            $user_ip = $this->get_user_ip();
+            $text->setLastReviewFromIp($user_ip);
+
+            $reviewDate = $this->newDate();
+            $text->setlastReviewDate($reviewDate);
+            $em->flush();
+    }
+
+    //set null into row 'Configuration'
+    public function setConfigNull($hash){
+        $em = $this->getDoctrine()->getManager();
+        $em->createQueryBuilder('privlink')
+            ->update('PrivlinkBundle:privlink', 'privlink')
+            ->set('privlink.configuration', '?1')
+            ->setParameter(1, false)
+            ->andwhere('privlink.hash IN (:hash)')
+            ->setParameter('hash', $hash)
+            ->getQuery()->getSingleScalarResult();
+    }
+
+    //get difference between two DateTime objects
+    public function timeDifference($nowDate, $endDate){
+        //difference between two DateTime objects
+        $diff = date_diff($nowDate, $endDate);
+        //Get Time to remove
+        $time = $diff->format("%d днів %h годин %i хвилин %s секунд");
+        return $time;
+    }
 
     // Determine the IP address of the user
     public function get_user_ip(){
@@ -189,8 +331,7 @@ class hiddenController extends Controller
 
         if(filter_var($client, FILTER_VALIDATE_IP)){
             $ip_addr = $forward;
-        } else
-        {
+        } else {
             $ip_addr = $remote;
         }
         return $ip_addr;
@@ -198,7 +339,6 @@ class hiddenController extends Controller
 
     //get today Date Time
     public function newDate(){
-
         $date = new \DateTime('now');
         return $date;
     }
