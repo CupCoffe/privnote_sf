@@ -36,6 +36,7 @@ class privlinkController extends Controller
             //get request from form
             $endDate = $request->request->get('privlinkbundle_privlink')['endDate'];
             $password = $request->request->get('privlinkbundle_privlink')['password'];
+
             if ($password) {
                 $password = md5($password);
                 $privlink->setPassword($password);

@@ -35,4 +35,12 @@ class DefaultController extends Controller
     {
         return $this->render('PrivlinkBundle:info:faq.html.twig');
     }
+
+    /**
+     * @Route("/save/{hash}")
+     */
+    public function saveAction($hash)
+    {
+        return $this->render('PrivlinkBundle:info:save.html.twig', array('hash'=>$hash));
+    }
 }

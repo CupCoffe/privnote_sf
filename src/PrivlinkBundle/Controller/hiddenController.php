@@ -37,30 +37,37 @@ class hiddenController extends Controller
         //get value from database
         $configuration = $text->getConfiguration();
         $password = $text->getPassword();
+        $checkbox = $text->getCheckbox();
 
         if ($configuration) {
 
-            if ($password) {
-                $form = $this->createForm('PrivlinkBundle\Form\checkPasswordType');
-                $form->handleRequest($request);
+            if ($password && $checkbox == false) {
+                if($checkbox == false){
+                    $warn_form = $this->createForm('PrivlinkBundle\Form\warnType');
+                    $warn_form->handleRequest($request);
 
-                if ($form->isSubmitted() && $form->isValid()) {
-                    //get request from form
-                    $entry_password  = $request->request->get('privlinkbundle_privlink')['password'];
-                    $entry_password  = md5($entry_password );
+                    if($warn_form->isSubmitted()){
+                        $form = $this->createForm('PrivlinkBundle\Form\checkPasswordType');
+                        $form->handleRequest($request);
 
-                    if ($password == $entry_password ) {
-                        $this->actionObject($text);
+                        if ($form->isSubmitted() && $form->isValid()) {
+                            //get request from form
+                            $entry_password  = $request->request->get('privlinkbundle_privlink')['password'];
+                            $entry_password  = md5($entry_password);
 
-                        if ($nowDate < $endDate) {
-                            $time = $this->timeDifference($nowDate,$endDate);
-                            return $this->render('PrivlinkBundle:privlink:hidden_time.html.twig',
-                                array('privlink' => $text, 'time' => $time,));
+                            if ($password == $entry_password) {
 
-                        } else if ($endDate == NULL) {
-                            $this->setConfigNull($hash);
-                            return $this->render('PrivlinkBundle:privlink:hidden.html.twig',
-                                array('privlink' => $text,));
+                                if ($nowDate < $endDate) {
+                                    $this->actionObject($text);
+                                    $time = $this->timeDifference($nowDate,$endDate);
+                                    return $this->render('PrivlinkBundle:privlink:hidden_time.html.twig',
+                                        array('privlink' => $text, 'time' => $time));
+
+                                } else if ($endDate == NULL) {
+                                    $this->actionObject($text);
+                                    $this->setConfigNull($hash);
+                                    return $this->render('PrivlinkBundle:privlink:hidden.html.twig',
+                                        array('privlink' => $text));
 
                         } else {
                             return $this->render('PrivlinkBundle:privlink:empty_page.html.twig');
@@ -68,28 +75,85 @@ class hiddenController extends Controller
 
                     } else {
                         return $this->render('PrivlinkBundle:privlink:checkPassword.html.twig',
-                            array('form' => $form->createView(), 'text' => false,
-                        ));
+                            array('form' => $form->createView(), 'text' => false));
                     }
 
                 }
                 return $this->render('PrivlinkBundle:privlink:checkPassword.html.twig',
-                    array('form' => $form->createView(), 'text' => true,));
+                    array('form' => $form->createView(), 'text' => true));
+            }
+                }  return $this->render('PrivlinkBundle:privlink:warn.html.twig',
+                    array('form' => $warn_form->createView(),'hash'=>$hash));
+
             }
 
+            if ($password && $checkbox == true) {
+                if ($checkbox == true) {
+                    $form = $this->createForm('PrivlinkBundle\Form\checkPasswordType');
+                    $form->handleRequest($request);
+
+                    if ($form->isSubmitted() && $form->isValid()) {
+                        //get request from form
+                        $entry_password = $request->request->get('privlinkbundle_privlink')['password'];
+                        $entry_password = md5($entry_password);
+
+                        if ($password == $entry_password) {
+
+
+                            if ($nowDate < $endDate) {
+                                $this->actionObject($text);
+                                $time = $this->timeDifference($nowDate, $endDate);
+                                return $this->render('PrivlinkBundle:privlink:hidden_time.html.twig',
+                                    array('privlink' => $text, 'time' => $time));
+
+                            } else if ($endDate == NULL) {
+                                $this->actionObject($text);
+                                $this->setConfigNull($hash);
+                                return $this->render('PrivlinkBundle:privlink:hidden.html.twig',
+                                    array('privlink' => $text));
+
+                            } else {
+                                return $this->render('PrivlinkBundle:privlink:empty_page.html.twig');
+                            }
+
+                        } else {
+                            return $this->render('PrivlinkBundle:privlink:checkPassword.html.twig',
+                                array('form' => $form->createView(), 'text' => false));
+                        }
+
+                    }
+                    return $this->render('PrivlinkBundle:privlink:checkPassword.html.twig',
+                        array('form' => $form->createView(), 'text' => true));
+                }
+            }
+
+
             if (empty($password)) {
-                $this->actionObject($text);
 
                 if ($nowDate < $endDate) {
+                    $this->actionObject($text);
                     $time = $this->timeDifference($nowDate,$endDate);
                     return $this->render('PrivlinkBundle:privlink:hidden_time.html.twig',
-                        array('privlink' => $text, 'time' => $time,));
+                        array('privlink' => $text, 'time' => $time));
 
                 } else if ($endDate == NULL) {
-                    $this->setConfigNull($hash);
-                    return $this->render('PrivlinkBundle:privlink:hidden.html.twig',
-                        array('privlink' => $text,));
-
+                    if($checkbox == false) {
+                        $warn_form = $this->createForm('PrivlinkBundle\Form\warnType');
+                        $warn_form->handleRequest($request);
+                        if ($warn_form->isSubmitted()) {
+                            $this->actionObject($text);
+                            $this->setConfigNull($hash);
+                            return $this->render('PrivlinkBundle:privlink:hidden.html.twig',
+                                array('privlink' => $text,));
+                        }
+                        return $this->render('PrivlinkBundle:privlink:warn.html.twig',
+                            array('form' => $warn_form->createView(),'hash'=>$hash));
+                    } elseif ($checkbox == true){
+                        $this->actionObject($text);
+                        $this->setConfigNull($hash);
+                        return $this->render('PrivlinkBundle:privlink:hidden.html.twig',
+                            array('privlink' => $text,));
+                    }
                 } else {
                     return $this->render('PrivlinkBundle:privlink:empty_page.html.twig');
                 }

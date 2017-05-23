@@ -11,6 +11,10 @@ hidden:
     pattern: /hidden/{hash}
     defaults: {_controller: PrivlinkBundle:hidden:index}
 
+save_link:
+    pattern: /save/{hash}
+    defaults: {_controller: PrvlinkBundle:default:save}
+
 about:
     pattern: /info/about/
     defaults: {_controller: PrivlinkBundle:default:about}
@@ -18,3 +22,4 @@ about:
 faq:
     pattern: /info/faq/
     defaults: {_controller: PrivlinkBundle:default:faq}
+
