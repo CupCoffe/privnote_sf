@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+<div class="container_1">
+        <h1>Прочитати і знищити?</h1>
+        <p>Ви збираєтесь прочитати записку з номером: <strong>{{ hash }}</strong></p>
+    {{ form_start(form) }}
+    {{ form_widget(form)}}
+
+        <a href="http://privnote/save/{{ hash }}" class="btn btn-primary btn-lg btn3d">Ні не зараз</a>
+
+    {{ form_end(form) }}
+</div>
+</div>
+
+{% endblock %}
