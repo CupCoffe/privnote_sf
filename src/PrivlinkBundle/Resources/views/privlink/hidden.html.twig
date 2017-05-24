@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-        <div class="alert alert-danger" role="alert">
-            <strong>Увага!</strong> Записка була самознищена Якщо вам потрібно зберегти текст, скопіюйте його перш ніж закривати це вікно
-        </div>
-    <div class="container">
+    <div class="alert alert-danger" role="alert">
+        <div id="convert"><img src="http://www.newsletterdirectory.co/images/bigenvelope.gif" width="50" height="61" alt="Message"></div>
+        <strong>Увага!</strong> Ваше повідомлення видалено, скопіюйте його!
+    </div>
+    <div class="container_2">
         <div class="hidden_text">
-            <p id="p2"> {{ privlink.text }}</p>
+            <div class="note"><p id="p2"> {{ privlink.text }}</p></div>
         </div>
         <div class="submit"><button class="btn btn-success btn-lg btn3d" onclick="copyToClipboard('#p2')">Скопіювати</button></div>
     </div>

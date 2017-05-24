@@ -1,317 +1,84 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'  type='text/css'>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'  type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title>{% block title %}Privnote{% endblock %}</title>
-        {% block stylesheets %}
-            <style>
-                body{
-                    font-family: 'Open Sans', sans-serif;
-                    background: url("https://image.freepik.com/free-vector/grey-linen-texture-background_1053-253.jpg");
-                }
+    <title>{% block title %}Privnote{% endblock %}</title>
 
-            h1 {
-                text-align: center;
-            }
-            .hint {
-                text-align: right;
-            }
-            .submit{
-                text-align: center;
-            }
-            .contact-form{ margin-top:15px;}
-            .contact-form .textarea{ min-height:220px; resize:none;}
-            .form-control{ box-shadow:none; border-color:#eee; height:49px; border: 1px solid;}
-            .form-control:focus{ box-shadow:none; border-color:#00b09c;}
-            .form-control-feedback{ line-height:50px;}
-            .main-btn{ background:#00b09c; border-color:#00b09c; color:#fff;}
-            .main-btn:hover{ background:#00a491;color:#fff;}
-            .form-control-feedback {
-                line-height: 50px;
-                top: 0px;
-            }
-            .jumbotron {
-                padding-top: 0px;
-                padding-bottom: 0px;
-                background-color: #424558;
-            }
-            .jumbotron h1{
-                color: red;
-            }
-            .jumbotron p{
-                color: white;
-            }
-            .btn3d {
-                position:relative;
-                top: -6px;
-                border:0;
-                transition: all 40ms linear;
-                margin-top:10px;
-                margin-bottom:10px;
-                margin-left:2px;
-                margin-right:2px;
-            }
-            .btn3d:active:focus,
-            .btn3d:focus:hover,
-            .btn3d:focus {
-                -moz-outline-style:none;
-                outline:medium none;
-            }
-            .btn3d:active, .btn3d.active {
-                top:2px;
-            }
-            .btn3d.btn-success {
-                box-shadow:0 0 0 1px #31c300 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #5eb924, 0 8px 8px 1px rgba(0,0,0,0.5);
-                background-color:#78d739;
-                margin-top: 50px;
-            }
-            .btn3d.btn-success:active, .btn3d.btn-success.active {
-                box-shadow:0 0 0 1px #30cd00 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
-                background-color: #78d739;
-            }
+    {% block stylesheets %}
+    {% endblock %}
 
-            .btn3d.btn-primary {
-                box-shadow:0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #4D5BBE, 0 8px 8px 1px rgba(0,0,0,0.5);
-                background-color:#4274D7;
-            }
-            .btn3d.btn-primary:active, .btn3d.btn-primary.active {
-                box-shadow:0 0 0 1px #417fbd inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
-                background-color:#4274D7;
-            }
-            textarea.form-control {
-                height: 200px;
-                background-color: #ffface;
-            }
-                .container {
-                    /*background-color: aliceblue;
-                    box-shadow: 10px 10px 5px #888888;*/
-                    background-color: white;
-                    border-radius: 10px;
-                }
-                .container_1{
-                    text-align: center;
-                }
-                .container_2{
-                    text-align: center;
-                }
-
-
-            /* Footer */
-
-            footer{
-                background-color: #424558;
-                position: inherit;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                height: 35px;
-                text-align: center;
-                color: #CCC;
-            }
-
-            footer p {
-                padding: 10.5px;
-                margin: 0px;
-                line-height: 100%;
-                margin-top: 100px;
-            }
-                #p1{
-                    font-family: initial;
-                    font-size: larger;
-                    background-color: aliceblue;
-                    height: 30px;
-                }
-
-                .container .hidden_text{
-                    height: 200px;
-                    background-color: #f5f5f5;
-                    border-radius: 10px;
-                    padding: 10px;
-                    border: 1px solid;
-                    text-align: left;
-                }
-                #time{
-                    color: black;
-                }
-            .alert-danger {
-                background-color: #f8f2cc;
-                text-align: center;
-            }
-                .endDate {
-                    width: 280px;
-                    height: 35px;
-                }
-            .password {
-                width: 280px;
-                height: 35px;
-            }
-            .password:focus{
-                outline: none;
-                border: 1px solid #7bc1f7;
-                box-shadow: 0px 0px 8px #7bc1f7;
-                -moz-box-shadow: 0px 0px 8px #7bc1f7;
-                -webkit-box-shadow: 0px 0px 8px #7bc1f7;
-            }
-            .email{
-                width: 400px;
-                height: 35px;
-                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABClpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wUmlnaHRzPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvcmlnaHRzLyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wUmlnaHRzOk1hcmtlZD0iVHJ1ZSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NzI3NTdDRTExNUFCMTFFMUE5NURCRkMwMEFDNjhEQUMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NzI3NTdDRTIxNUFCMTFFMUE5NURCRkMwMEFDNjhEQUMiPiA8ZGM6cmlnaHRzPiA8cmRmOkFsdD4gPHJkZjpsaSB4bWw6bGFuZz0ieC1kZWZhdWx0Ij5DcmVhdGl2ZSBDb21tb25zIEF0dHJpYnV0aW9uIE5vbi1Db21tZXJjaWFsIE5vIERlcml2YXRpdmVzPC9yZGY6bGk+IDwvcmRmOkFsdD4gPC9kYzpyaWdodHM+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjcyNzU3Q0RGMTVBQjExRTFBOTVEQkZDMDBBQzY4REFDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjcyNzU3Q0UwMTVBQjExRTFBOTVEQkZDMDBBQzY4REFDIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+SoKR9AAAAH5JREFUeNpi/P//PwMlgImBQsDS39/fAKTrydTfyESBZhCoR/bCAig9AYgZceAFaGpRwiARKlEAxPOx2AYSS4CqSYSHAZoimEQCGh+rZmwGYDOEAZdmXAZgMwSrZnwGMKBpSMSZDghEUyLtUyIS+z+5eaGRAgc0Mg54bgQIMAAD7RsCMDpK7QAAAABJRU5ErkJggg==) no-repeat 10px 4px #FFF;
-                border: 1px solid #848484;
-                padding-left: 30px;
-            }
-            .email:focus{
-                outline: none;
-                border: 1px solid #7bc1f7;
-                box-shadow: 0px 0px 8px #7bc1f7;
-                -moz-box-shadow: 0px 0px 8px #7bc1f7;
-                -webkit-box-shadow: 0px 0px 8px #7bc1f7;
-            }
-
-            .form-group {
-                margin-bottom: 5px;
-            }
-                .container1{
-                    text-align: center;
-                }
-
-                .wrong{
-                    background-color: red;
-                    color: white;
-                    width: 300px;
-                    padding-left: 20px;
-                }
-                .text_area:focus{
-                    outline: none;
-                    border: 1px solid #7bc1f7;
-                    box-shadow: 0px 0px 8px #7bc1f7;
-                    -moz-box-shadow: 0px 0px 8px #7bc1f7;
-                    -webkit-box-shadow: 0px 0px 8px #7bc1f7;
-                }
-                img{
-                    position: absolute;
-                    margin-top: -100px;
-                    margin-left: 150px;
-                }
-                #hidden_content{
-                    background-color: #e7e7e7;
-                    padding: 5px;
-                }
-                .warn btn{
-                    text-align: center;
-                }
-                .bird{
-                    background: url("https://cdn3.iconfinder.com/data/icons/digital-marketing/512/bird_origami_news_social_media_flat_icon-512.png") no-repeat;
-                    height: 500px;
-                }
-
-                .container_3{
-                    text-align: center;
-                    position: absolute;
-                    width: 600px;
-                    height: 500px;
-                    margin-left: 35%;
-                    margin-right: 35%;
-                }
-
-                .btn3d.btn-info {
-                    box-shadow: 0 0 0 1px #00a5c3 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #348FD2, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
-                    background-color: #39B3D7;
-                    margin-bottom: -70px;
-                    margin-left: 200px;
-                }
-                .checkbox_1{
-                    position: absolute;
-                    margin-left: 330px;
-                    margin-top: -45px;
-                }
-                .second_password{
-                    position: absolute;
-                    margin-left: 330px;
-                    margin-top: -59px;
-                }
-                .email1{
-                    margin-top: 10px;
-                }
-                .first_password{
-                    margin-top: 10px;
-                }
-
-            </style>
-
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+<div class="page_container">
     <div class="jumbotron text-center">
-        <a href="{{ path('privlink_new') }}"><h1>Privnote</h1></a> <img src="http://www.computermechanics.com.au/wp-content/uploads/2014/11/spemail-logo.png" width="100" height="111" alt="Винни-Пух">
+        <a href="{{ path('privlink_new') }}"><h1>Privnote</h1></a> <div id="logo"><img src="http://www.computermechanics.com.au/wp-content/uploads/2014/11/spemail-logo.png" width="100" height="111" alt="Message"></div>
         <p>Відсилайте записки, котрі будуть самознищені після прочитування</p>
     </div>
 
-        {% block body %}{% endblock %}
-    {% block footer %}
+    {% block body %}{% endblock %}
 
-        <footer>
-            <p>© 2017<a style="color:#0a93a6; text-decoration:none;"> Copyright &copy; 2017</a>, All rights reserved 2017.</p>
-        </footer>
-    {% endblock %}
-        {% block javascripts %}
-            <script>
-            function copyToClipboard(element) {
+    {% block footer %}
+    <footer>
+        © 2017<a style="color:#0a93a6; text-decoration:none;"> Copyright &copy; 2017</a>, All rights reserved 2017.
+    </footer>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        //Copy to clipboard
+        function copyToClipboard(element) {
             var $temp = $("<input>");
             $("body").append($temp);
             $temp.val($(element).text()).select();
             document.execCommand("copy");
             $temp.remove();
-            }
+        }
 
-            function toggle(el) {
+        //Anchor Links
+        var controller = new ScrollMagic.Controller();
 
-                el.style.display = (el.style.display == 'none') ? '' : 'none'
+        // build tween
+        var tween = TweenMax.from("#animate", 0.5, {autoAlpha: 0, scale: 0.7});
 
-            }
+        // build scene
+        var scene = new ScrollMagic.Scene({triggerElement: "a#top", duration: 200, triggerHook: "onLeave"})
+            .setTween(tween)
+            .addIndicators() // add indicators (requires plugin)
+            .addTo(controller);
 
-            //Anchor Links
-            var controller = new ScrollMagic.Controller();
+        // change behaviour of controller to animate scroll instead of jump
+        controller.scrollTo(function (newpos) {
+            TweenMax.to(window, 0.5, {scrollTo: {y: newpos}});
+        });
 
-            // build tween
-            var tween = TweenMax.from("#animate", 0.5, {autoAlpha: 0, scale: 0.7});
+        //  bind scroll to anchor links
+        $(document).on("click", "a[href^='#']", function (e) {
+            var id = $(this).attr("href");
+            if ($(id).length > 0) {
+                e.preventDefault();
 
-            // build scene
-            var scene = new ScrollMagic.Scene({triggerElement: "a#top", duration: 200, triggerHook: "onLeave"})
-                .setTween(tween)
-                .addIndicators() // add indicators (requires plugin)
-                .addTo(controller);
+                // trigger scroll
+                controller.scrollTo(id);
 
-            // change behaviour of controller to animate scroll instead of jump
-            controller.scrollTo(function (newpos) {
-                TweenMax.to(window, 0.5, {scrollTo: {y: newpos}});
-            });
-
-            //  bind scroll to anchor links
-            $(document).on("click", "a[href^='#']", function (e) {
-                var id = $(this).attr("href");
-                if ($(id).length > 0) {
-                    e.preventDefault();
-
-                    // trigger scroll
-                    controller.scrollTo(id);
-
-                    // if supported by the browser we can even update the URL.
-                    if (window.history && window.history.pushState) {
-                        history.pushState("", document.title, id);
-                    }
+                // if supported by the browser we can even update the URL.
+                if (window.history && window.history.pushState) {
+                    history.pushState("", document.title, id);
                 }
-            });
-            </script>
+            }
+        });
 
-        {% endblock %}
-    </body>
+    </script>
+{% endblock %}
+</body>
 </html>

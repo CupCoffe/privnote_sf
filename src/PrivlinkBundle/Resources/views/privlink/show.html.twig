@@ -5,7 +5,10 @@
     <div class="alert alert-success" role="alert">
         <strong>Готово!</strong> Скопіюйте посилання.
     </div>
-        <p id="p1"><strong>http://privnote/hidden/{{ privlink.hash }}</strong></p> <button class="btn btn-success btn-lg btn3d" onclick="copyToClipboard('#p1')">Скопіювати</button>
+        <div id="mail_lock">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Mailvelope_mail_locked_icon.svg/768px-Mailvelope_mail_locked_icon.svg.png" width="60" height="61" alt="Message">
+        </div>
+        <p id="p1"><strong>http://privnote/{{ privlink.hash }}</strong></p> <button class="btn btn-success btn-lg btn3d" onclick="copyToClipboard('#p1')">Скопіювати</button>
     </div>
 {% endblock %}
 
