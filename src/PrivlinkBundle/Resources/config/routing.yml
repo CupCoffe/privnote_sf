@@ -8,7 +8,7 @@ privlink:
     defaults: {_controller: PrivlinkBundle:privlink:new}
 
 hidden:
-    pattern: /hidden/{hash}
+    pattern: /{hash}
     defaults: {_controller: PrivlinkBundle:hidden:index}
 
 save_link:

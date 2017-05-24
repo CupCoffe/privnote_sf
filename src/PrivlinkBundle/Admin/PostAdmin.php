@@ -37,8 +37,27 @@ class PostAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('text')
-            ->add('password');
+            ->add('text',null, array('label' => 'Вміст повідомлення', 'attr' => array()))
+            ->add('endDate',  'choice', array(
+                'choices' => array(
+                    1 => 'Один день',
+                    7 => 'Тиждень',
+                    30 => 'Місяць',
+                    null => 'Після перегляду',
+                ),
+                'label' => 'Записка самознищиться',
+                'attr' => array('class' => 'endDate') ))
+
+            ->add('password','repeated', array(
+                'type' => 'password',
+                'invalid_message' => 'Паролі не співпадають',
+                'options' => array('attr' => array('class' => 'password')),
+                'required' => false,
+                'first_options'  => array('label' => 'Пароль'),
+                'second_options' => array('label' => 'Повторити пароль', 'attr' => array('onchange' => 'checkPass ()'))))
+
+            ->add('email','email',array('label' => 'Отримати сповіщення про прочитування записки по e-mail', 'attr' => array('class'=>'email'),'required' => false))
+            ->add('checkbox',null,array('label' => 'Не питати про підтверждення перш ніж показати та знищити повідомлення.'));
 
     }
 
