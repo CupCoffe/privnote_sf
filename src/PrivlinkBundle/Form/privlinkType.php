@@ -17,7 +17,7 @@ class privlinkType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('text',TextareaType::class,array('label' => 'Вміст повідомлення', 'attr' => array('class' => 'text_area')))
+            ->add('text',null, array('label' => 'Вміст повідомлення'))
             ->add('endDate',  'choice', array(
                 'choices' => array(
                     1 => 'Один день',
@@ -27,11 +27,19 @@ class privlinkType extends AbstractType
                 ),
                 'label' => 'Записка самознищиться',
                 'attr' => array('class' => 'endDate') ))
-            ->add('password',null,array('label' => 'Пароль', 'attr' => array('class' => 'password')))
-            ->add('email',null,array('label' => 'Отримати сповіщення про прочитування записки по e-mail', 'attr' => array('class'=>'email')))
+
+            ->add('password','repeated', array(
+    'type' => 'password',
+    'invalid_message' => 'Паролі не співпадають',
+    'options' => array('attr' => array('class' => 'password')),
+    'required' => false,
+    'first_options'  => array('label' => 'Пароль'),
+    'second_options' => array('label' => 'Повторити пароль', 'attr' => array('onchange' => 'checkPass ()'))))
+
+            ->add('email','email',array('label' => 'Отримати сповіщення про прочитування записки по e-mail', 'attr' => array('class'=>'email'),'required' => false))
             ->add('checkbox',null,array('label' => 'Не питати про підтверждення перш ніж показати та знищити повідомлення.'));
     }
-    
+
     /**
      * {@inheritdoc}
      */
