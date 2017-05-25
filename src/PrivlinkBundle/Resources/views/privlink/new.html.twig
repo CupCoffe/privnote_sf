@@ -36,12 +36,11 @@
                 {{ form_widget(form.checkbox) }}
             </div>
             <div class="first_password">
-                <div id="pass">
                 {{ form_label(form.password.first) }}
                 {{ form_errors(form.password.first) }}
                 {{ form_widget(form.password.first) }}
-                </div>
             </div>
+
             <div class="second_password">
                 {{ form_label(form.password.second) }}
                 {{ form_errors(form.password.second) }}
@@ -53,6 +52,7 @@
                 {{ form_errors(form.email) }}
                 {{ form_widget(form.email) }}
             </div>
+
         </div>
         {{ form_widget(form)}}
         <a onclick="toggle(hidden_content1)" class="btn btn-info btn-lg btn3d" role="button">Додаткові параметри</a>
@@ -62,22 +62,20 @@
         {{ form_end(form) }}
     </div>
 {% endblock %}
-
 {% block javascripts %}
     <script>
-        //check password
-    function checkPass ()
-    {
-    with (document)
-    getElementById ('info').innerHTML = (getElementById ('privlinkbundle_privlink_password_first').value != getElementById ('privlinkbundle_privlink_password_second').value) ?
-    'Паролі не одинакові' : 'OK!';
-    }
-    //hide a box "parameters"
-    function toggle(el) {
+        function checkPass ()
+        {
+            with (document)
+                getElementById ('info').innerHTML = (getElementById ('privlinkbundle_privlink_password_first').value != getElementById ('privlinkbundle_privlink_password_second').value) ?
+                    'Паролі не одинакові' : 'OK!';
+        }
 
-        el.style.display = (el.style.display == 'none') ? '' : 'none'
+        function toggle(el) {
 
-    }
+            el.style.display = (el.style.display == 'none') ? '' : 'none'
+
+        }
     </script>
 {% endblock %}
 
