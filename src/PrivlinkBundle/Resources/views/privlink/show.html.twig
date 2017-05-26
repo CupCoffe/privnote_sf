@@ -2,13 +2,32 @@
 
 {% block body %}
     <div class="container_1">
-    <div class="alert alert-success" role="alert">
-        <strong>Готово!</strong> Скопіюйте посилання.
+
+  <div>
+      <strong><h3>Посилання на записку готове</h3></strong>
+      <div id="ask"><a onclick="toggle(hidden_content_1)" class="btn btn-link btn-lg btn3d" role="button"><span class="glyphicon glyphicon-globe"></span> Підказка</a></div>
+      <div id="hidden_content_1" style="display: none;">
+          <p>Скопіюйте посилання та надішліть тому, кому бажаєте.</p>
+      </div>
+        <p id="p1"><strong>http://privnote/{{ privlink.hash }}</strong></p> <button class="btn btn-success btn-lg btn3d" onclick="copyToClipboard('#p1')">Копіювати посилання</button>
     </div>
-        <div id="mail_lock">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Mailvelope_mail_locked_icon.svg/768px-Mailvelope_mail_locked_icon.svg.png" width="60" height="61" alt="Message">
-        </div>
-        <p id="p1"><strong>http://privnote/{{ privlink.hash }}</strong></p> <button class="btn btn-success btn-lg btn3d" onclick="copyToClipboard('#p1')">Скопіювати</button>
     </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function toggle(el) {
+
+            el.style.display = (el.style.display == 'none') ? '' : 'none'
+
+        }
+        //Copy to clipboard
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+    </script>
 {% endblock %}
 

@@ -14,6 +14,7 @@
                 <p><li>Надішліть посилання тому, кому ви хочете, щоб він прочитав записку</li></p>
                 <p><li>Записка самознищиться після прочитування ії отримувачем</li></p>
             </ol>
+            <p>Натисніть кнопку додатковы налаштування, щоб встановити пароль для записки, встановити дату, до якої можна прочитати записку та отримати підтвердження про прочитування.</p>
             <p>Щоб зрозуміти, як працює Privnote, дивіться <a href="{{ path('about') }}"><strong>Про нас</strong></a>.</p>
         </div>
         {{ form_start(form) }}
@@ -55,7 +56,7 @@
 
         </div>
         {{ form_widget(form)}}
-        <a onclick="toggle(hidden_content1)" class="btn btn-info btn-lg btn3d" role="button">Додаткові параметри</a>
+        <a onclick="toggle(hidden_content1)" class="btn btn-info btn-lg btn3d" role="button">Додаткові налаштування</a>
         <div>
             <input type="submit" value="Створити записку" class="btn btn-primary btn-lg btn3d"/>
         </div>
