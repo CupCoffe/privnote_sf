@@ -3,15 +3,20 @@
 {% block body %}
     <div class="container_1">
 
-  <div>
-      <strong><h3>Посилання на записку готове</h3></strong>
-      <div id="ask"><a onclick="toggle(hidden_content_1)" class="btn btn-link btn-lg btn3d" role="button"><span class="glyphicon glyphicon-globe"></span> Підказка</a></div>
-      <div id="hidden_content_1" style="display: none;">
-          <p>Скопіюйте посилання та надішліть тому, кому бажаєте.</p>
-      </div>
-        <p id="p1"><strong>http://privnote/{{ privlink.hash }}</strong></p> <button class="btn btn-success btn-lg btn3d" onclick="copyToClipboard('#p1')">Копіювати посилання</button>
+        <div>
+            <strong><h3>Посилання на записку готове</h3></strong>
+            <div id="ask"><a onclick="toggle(hidden_content_1)" class="btn btn-link btn-lg btn3d" role="button"><span class="glyphicon glyphicon-globe"></span> Підказка</a></div>
+            <div id="hidden_content_1" style="display: none;">
+                <p>Скопіюйте посилання та надішліть тому, кому бажаєте.</p>
+            </div>
+            <p id="p1"><strong>http://privnote/{{ privlink.hash }}</strong></p> <button class="btn btn-success btn-lg btn3d" onclick="copyToClipboard('#p1')">Копіювати посилання</button>
+            <div id="buttonFirst"><button onclick="location.href='mailto:?body=http://privnote/{{ privlink.hash }}';" class="btn btn-primary btn-lg btn3d"><span class="glyphicon glyphicon-cloud"></span> Відправити по email</button></div>
+            <div id="buttonSecond"><button onclick="location.href='http://privnote/{{ privlink.hash }}';" class="btn3d btn btn-white btn-lg"><span class="glyphicon glyphicon-tag"></span> Прочитати записку</button></div>
+
+        </div>
     </div>
-    </div>
+
+
 {% endblock %}
 {% block javascripts %}
     <script>

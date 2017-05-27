@@ -84,6 +84,7 @@ textarea.form-control {
     /*background-color: white;*/
     border-radius: 10px;
     background: url("https://s-media-cache-ak0.pinimg.com/236x/93/df/3b/93df3b7ccdb205133908e514ca01e881.jpg?noindex=1");
+
 }
 .maincontainer{
     border-radius: 10px;
@@ -119,10 +120,11 @@ footer{
     text-align: center;
     color: #CCC;
     height: 80px;
-    position: absolute;
+    /*position: absolute;*/
     width: 100%;
     padding: 30px;
-    margin-top: 100px;
+    margin-top: 200px;
+    bottom: 0px;
 }
 
 #p1{
@@ -192,7 +194,9 @@ footer{
     background-color: red;
     color: white;
     width: 300px;
-    padding-left: 20px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 .text_area:focus{
     outline: none;
@@ -228,7 +232,7 @@ footer{
     color: #333;
     word-break: break-all;
     word-wrap: break-word;
-    background-color: #f5f5f5;
+    background-color: white;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-left: 5%;
@@ -256,6 +260,16 @@ footer{
     background-color: #39B3D7;
     margin-bottom: -70px;
     margin-left: 200px;
+}
+.btn3d.btn-white {
+    color: #666666;
+    box-shadow:0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255,255,255,0.10) inset, 0 8px 0 0 #f5f5f5, 0 8px 8px 1px rgba(0,0,0,.2);
+    background-color:#fff;
+}
+.btn3d.btn-white:active, .btn3d.btn-white.active {
+    color: #666666;
+    box-shadow:0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,.1);
+    background-color:#fff;
 }
 .checkbox_1{
     position: absolute;
@@ -291,6 +305,12 @@ footer{
 }
 #ask{
     margin: -10px;
+}
+#checkPassword{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 280px;
+    text-align: center;
 }
 
 
