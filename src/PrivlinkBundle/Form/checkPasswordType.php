@@ -17,7 +17,8 @@ class checkPasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('password','password',array('label'=>'Введіть будь-ласка пароль', 'attr'=>array('class'=>'password')));
+            ->add('password','password',array('label'=>'Введіть будь-ласка пароль', 'attr'=>array('class'=>'password')))
+            ->add('submit_button','submit', array('label' => 'Підтвердити', 'attr' => array('class' => 'btn btn-primary btn-sm btn3d')));
     }
 
     /**
