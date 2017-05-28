@@ -120,10 +120,34 @@ footer{
     text-align: center;
     color: #CCC;
     height: 80px;
-    /*position: absolute;*/
+    position: absolute;
     width: 100%;
     padding: 30px;
     margin-top: 200px;
+    bottom: 0px;
+}
+#footerFaq{
+    background-color: #424558;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #CCC;
+    height: 80px;
+    width: 100%;
+    padding: 30px;
+    margin-top: 100px;
+    bottom: 0px;
+}
+#footerNewpage{
+    background-color: #424558;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #CCC;
+    height: 80px;
+    width: 100%;
+    padding: 30px;
+    margin-top: 250px;
     bottom: 0px;
 }
 
