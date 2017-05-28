@@ -1,69 +1,38 @@
-Symfony Standard Edition
+Analogue of site Privnote.com
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+Have you ever wanted to send confidential information within your work environment, to family or friends, but were afraid to do so 
+over the internet, because some malicious hacker could be spying on you?
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+Privnote is a free web based service that allows you to send top secret 
+notes over the internet. It's fast, easy, and requires no password or 
+user registration at all.
 
-What's inside?
+How it works?
 --------------
 
-The Symfony Standard Edition is configured with the following defaults:
+So here's what happens when you create a note in Privnote:
 
-  * An AppBundle you can use to start coding;
-
-  * Twig as the only configured template engine;
-
-  * Doctrine ORM/DBAL;
-
-  * Swiftmailer;
-
-  * Annotations enabled for everything.
-
-It comes pre-configured with the following bundles:
-
-  * **FrameworkBundle** - The core Symfony framework bundle
-
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-
-
-[1]:  https://symfony.com/doc/2.8/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/2.8/doctrine.html
-[8]:  https://symfony.com/doc/2.8/templating.html
-[9]:  https://symfony.com/doc/2.8/security.html
-[10]: https://symfony.com/doc/2.8/email.html
-[11]: https://symfony.com/doc/2.8/logging.html
-[12]: https://symfony.com/doc/2.8/assetic/asset_management.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
+1. You write the note and click the POST button
+2. The server generates a random note id, let's call it the NoteID. 
+This is the 10 chars ID you see in the note link
+3. The server hashes the note ID and gets a HashedNoteID = Hash(NoteID).
+4. The server encrypts the note contents (and also the email and reference,
+ if there is any) using the NoteID, and stores the encrypted version in 
+ the database using the HashedNoteID as the database primary key.
+ 
+ If someone with access to the database would like to read the note she would be 
+ unable because she doesn't have the key to decrypt it (NoteID), only the 
+ database primary key (HashedNoteID). The HashedNoteID cannot be used to
+ "go back" to the NoteID because hashes are "one-way". So the only person
+ who can actually decrypt (and thus see) the note is the one who has the
+ original NoteID or, in other words, the one who has the link to the note.
+ 
+ This is what happens when you view a note in Privnote:
+ --------------
+ * The server extracts the NoteID from the URL.
+ * The server retrieves the note from the database using HashedNoteID as 
+ the database primary key and decrypts its contents using NoteID as the 
+ encryption key
+ * The server shows the page with the decrypted note.
+ 
